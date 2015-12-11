@@ -13,7 +13,7 @@ class TodoListTest < Test::Unit::TestCase
       assert_equal(@list.count, 0)
       @list.add(title: 'foo')
       assert_equal(@list.count, 1)
-      assert_equal(@list[0][:title], 'foo')
+      assert_equal(@list[0].title, 'foo')
     end
   end
 end

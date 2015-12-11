@@ -1,40 +1,38 @@
 module Ruboty
   module Todo
     class List
-      extend Forwardable
+      class Item
+        ATTRIBUTES = [:id, :title, :status, :dadline_at].freeze
+        STATUSES   = [:not_yet, :doing, :done, :deleted].freeze
 
-      COLUMNS = [:id, :title, :status, :dadline_at].freeze
-      STATUS  = [:not_yet, :doing, :done, :deleted].freeze
+        ATTRIBUTES.each { |attr| attr_accessor attr }
+
+        def initialize(id, params)
+          self.id = id
+          ATTRIBUTES.each { |attr| self.send("#{attr}=".to_sym, params[attr]) }
+        end
+      end
+
+      extend Forwardable
 
       BLANK_LIST = {
         last_id: 0,
-        todos: [],
-      }.freeze
-
-      BLANK_TODO = {
-        id: 0,
-        title: '',
-        status: :not_yet,
-        deadline_at: nil,
+        items: [],
       }.freeze
 
       attr_reader :brain
-      def_delegators :all, :count, :size, :[]
+      def_delegators :items, :count, :size, :[]
 
       def initialize(brain)
         @brain = brain
       end
 
-      def all
-        list[:todos]
+      def items
+        list[:items]
       end
 
       def add(params)
-        new_todo = COLUMNS.each_with_object(blank_todo) do |column, todo|
-          todo[column] = params[column]
-        end
-        new_todo[:id] = list[:last_id] += 1
-        list[:todos].push(new_todo)
+        items.push(Item.new(list[:last_id] += 1, params))
       end
 
       private
@@ -45,10 +43,6 @@ module Ruboty
 
       def default_list
         BLANK_LIST.dup
-      end
-
-      def blank_todo
-        BLANK_TODO.dup
       end
     end
   end
