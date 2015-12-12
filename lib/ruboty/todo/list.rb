@@ -11,6 +11,22 @@ module Ruboty
           self.id = id
           ATTRIBUTES.each { |attr| self.send("#{attr}=".to_sym, params[attr]) }
         end
+
+        def start
+          self.status = :doing
+        end
+
+        def finish
+          self.status = :done
+        end
+
+        def delete
+          self.status = :deleted
+        end
+
+        def deleted?
+          self.status == :deleted
+        end
       end
 
       extend Forwardable
@@ -28,7 +44,7 @@ module Ruboty
       end
 
       def items
-        list[:items]
+        list[:items] = list[:items].reject { |item| item.deleted? }
       end
 
       def add(params)
