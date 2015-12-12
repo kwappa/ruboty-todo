@@ -2,7 +2,7 @@ module Ruboty
   module Todo
     class List
       class Item
-        ATTRIBUTES = [:id, :title, :status, :dadline_at].freeze
+        ATTRIBUTES = [:id, :title, :status, :deadline_at].freeze
         STATUSES   = [:not_yet, :doing, :done, :deleted].freeze
 
         ATTRIBUTES.each { |attr| attr_accessor attr }
@@ -34,6 +34,10 @@ module Ruboty
 
         def deleted?
           self.status == :deleted
+        end
+
+        def deadline=(deadline)
+          self.deadline_at = Time.parse(deadline) rescue nil
         end
       end
 

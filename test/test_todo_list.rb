@@ -40,5 +40,13 @@ class TodoListTest < Test::Unit::TestCase
       assert_equal(@list.count, 1)
       assert_equal(@list[0].title, 'piyo')
     end
+
+    test 'item can set deadline' do
+      @list[0].deadline = '13:45'
+      @list[1].deadline = 'INVALIDD STRING'
+      today = Date.today
+      assert_equal(@list[0].deadline_at, Time.local(today.year, today.month, today.day, 13, 45))
+      assert_nil(@list[1].deadline_at)
+    end
   end
 end
