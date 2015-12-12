@@ -24,6 +24,13 @@ class TodoListTest < Test::Unit::TestCase
       @list.add(title: 'piyo')
     end
 
+    test 'list can change status of items' do
+      @list[0].start
+      assert_true(@list[0].doing?)
+      @list[1].finish
+      assert_true(@list[1].done?)
+    end
+
     test 'list can remove item' do
       assert_equal(@list.count, 2)
       assert_equal(@list[0].title, 'hoge')

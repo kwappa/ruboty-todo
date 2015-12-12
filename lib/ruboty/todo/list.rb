@@ -16,8 +16,16 @@ module Ruboty
           self.status = :doing
         end
 
+        def doing?
+          self.status == :doing
+        end
+
         def finish
           self.status = :done
+        end
+
+        def done?
+          self.status == :done
         end
 
         def delete
