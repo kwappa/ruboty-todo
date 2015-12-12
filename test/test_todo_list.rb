@@ -25,6 +25,7 @@ class TodoListTest < Test::Unit::TestCase
     end
 
     test 'list can change status of items' do
+      assert_equal(@list[0].status, :not_yet)
       @list[0].start
       assert_true(@list[0].doing?)
       @list[1].finish

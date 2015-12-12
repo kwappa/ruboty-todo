@@ -9,7 +9,10 @@ module Ruboty
 
         def initialize(id, params)
           self.id = id
-          ATTRIBUTES.each { |attr| self.send("#{attr}=".to_sym, params[attr]) }
+          self.status = :not_yet
+          ATTRIBUTES.each do |attr|
+            self.send("#{attr}=".to_sym, params[attr]) if params.key?(attr)
+          end
         end
 
         def start
