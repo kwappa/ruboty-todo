@@ -31,11 +31,6 @@ module Ruboty
 
       extend Forwardable
 
-      BLANK_LIST = {
-        last_id: 0,
-        items: [],
-      }.freeze
-
       attr_reader :brain
       def_delegators :items, :count, :size, :[]
 
@@ -44,21 +39,21 @@ module Ruboty
       end
 
       def items
-        list[:items] = list[:items].reject { |item| item.deleted? }
+        list[:items]
       end
 
       def add(params)
         items.push(Item.new(list[:last_id] += 1, params))
       end
 
+      def cleanup
+        list[:items] = list[:items].reject { |item| item.deleted? }
+      end
+
       private
 
       def list
-        brain.data['todo_list'] ||= default_list
-      end
-
-      def default_list
-        BLANK_LIST.dup
+        brain.data['todo_list'] ||= { last_id: 0, items: [] }
       end
     end
   end
