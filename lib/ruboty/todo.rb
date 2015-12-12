@@ -1,6 +1,5 @@
+require 'ruboty'
 require 'ruboty/todo/version'
-
-module Ruboty
-  module Todo
-  end
-end
+require 'ruboty/todo/list'
+require 'ruboty/actions/todo'
+require 'ruboty/handlers/todo'
