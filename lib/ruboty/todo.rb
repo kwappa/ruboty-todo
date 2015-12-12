@@ -1,5 +1,6 @@
 require 'ruboty'
 require 'ruboty/todo/version'
 require 'ruboty/todo/list'
+require 'ruboty/todo/item'
 require 'ruboty/actions/todo'
 require 'ruboty/handlers/todo'

@@ -5,7 +5,6 @@ class TodoListTest < Test::Unit::TestCase
   self.test_order = :defined
 
   setup do
-
     @list = Ruboty::Todo::List.new(Ruboty::Brains::Memory.new)
   end
 
