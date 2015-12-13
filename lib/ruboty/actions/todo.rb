@@ -18,11 +18,29 @@ module Ruboty
       end
 
       def help(arg)
+<<EOH
+  `todo list`
+    show todo list
+  `todo add [TITLE]`
+    add list to new todo
+  `todo start [ID}`
+    start todo
+  `todo finish [ID]`
+    finish todo (will removed by `cleanup`)
+  `todo delete [ID]`
+    remove todo (will removed by `cleanup`)
+  `todo cleanup`
+    delete finished and deleted items from list
+  `todo renum`
+    renum id from 1
+  `todo help`
+    show this help
+EOH
       end
 
       def add(arg)
-        return '' if arg.to_s == ''
-        todo_list.add(title: arg).format(new_item: true)
+        return 'specify todo tilte like `todo add [TITLE]`' if title == ''
+        todo_list.add(title: title).format(new_item: true)
       end
 
       def start(arg)
