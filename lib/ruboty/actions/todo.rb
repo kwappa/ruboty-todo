@@ -5,6 +5,8 @@ module Ruboty
       attr_reader :todo_list
 
       def call
+        return unless from_owner?
+
         (command, arg) = (message[:data] || '').split(/\s/, 2)
         command = parse_command(command)
         @todo_list = ::Ruboty::Todo::List.new(message.robot.brain)
@@ -67,6 +69,11 @@ EOH
       end
 
       private
+
+      def from_owner?
+        return true if ENV['TODO_OWNERS'] == 'IGNORE_CHECK'
+        ENV['TODO_OWNERS'].split(',').map(&:strip).include?(message.from_name)
+      end
 
       def change_item_state(arg, status)
         item = find_item(arg)
