@@ -23,7 +23,7 @@ module Ruboty
     show todo list
   `todo add [TITLE]`
     add list to new todo
-  `todo start [ID}`
+  `todo start [ID]`
     start todo
   `todo finish [ID]`
     finish todo (will removed by `cleanup`)
@@ -39,7 +39,8 @@ EOH
       end
 
       def add(arg)
-        return 'specify todo tilte like `todo add [TITLE]`' if title == ''
+        title = arg.to_s.strip
+        return 'specify todo title like `todo add [TITLE]`' if title == ''
         todo_list.add(title: title).format(new_item: true)
       end
 

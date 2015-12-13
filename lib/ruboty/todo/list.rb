@@ -21,7 +21,9 @@ module Ruboty
       end
 
       def cleanup
-        list[:items] = list[:items].reject { |item| item.deleted? }
+        list[:items] = list[:items].reject { |item| item.deleted? || item.done? }
+        reset_id if list[:items].empty?
+        items
       end
 
       def find(id)

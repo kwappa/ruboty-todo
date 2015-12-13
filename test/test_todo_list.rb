@@ -57,5 +57,15 @@ class TodoListTest < Test::Unit::TestCase
       assert_equal(@list[0].deadline_at, Time.local(today.year, today.month, today.day, 13, 45))
       assert_nil(@list[1].deadline_at)
     end
+
+    test 'reset id if item is empty after cleanup' do
+      @list[0].delete
+      @list.cleanup
+      assert_equal(@list.send(:next_id), 3)
+      @list[0].finish
+      @list.cleanup
+      assert_true(@list.items.empty?)
+      assert_equal(@list.send(:next_id), 1)
+    end
   end
 end
