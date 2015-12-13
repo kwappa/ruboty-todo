@@ -14,6 +14,7 @@ class TodoListTest < Test::Unit::TestCase
       @list.add(title: 'foo')
       assert_equal(@list.count, 1)
       assert_equal(@list[0].title, 'foo')
+      assert_equal(@list[0].id, 1)
     end
   end
 

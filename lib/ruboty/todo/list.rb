@@ -10,12 +10,16 @@ module Ruboty
         @brain = brain
       end
 
+      def next_id
+        list[:last_id] += 1
+      end
+
       def items
         list[:items]
       end
 
       def add(params)
-        item = Item.new(list[:last_id] += 1, params)
+        item = Item.new(next_id, params)
         items.push(item)
         item
       end
