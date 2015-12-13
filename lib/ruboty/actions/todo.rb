@@ -26,18 +26,35 @@ module Ruboty
       end
 
       def start(arg)
+        change_item_state(arg, :start)
       end
 
       def finish(arg)
+        change_item_state(arg, :finish)
       end
 
       def delete(arg)
+        change_item_state(arg, :delete)
       end
 
       def cleanup(arg)
+        todo_list.cleanup
+        list(arg)
       end
 
       private
+
+      def change_item_state(arg, status)
+        item = find_item(arg)
+        return "item #{arg} is not found" if item.nil?
+        item.send(status)
+        item.format
+      end
+
+      def find_item(arg)
+        id = arg.to_i
+        item = todo_list.find(arg.to_i)
+      end
 
       def parse_command(command)
         if COMMANDS.include?(command)

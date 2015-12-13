@@ -24,6 +24,10 @@ module Ruboty
         list[:items] = list[:items].reject { |item| item.deleted? }
       end
 
+      def find(id)
+        items.find { |item| item.id == id }
+      end
+
       private
 
       def list
