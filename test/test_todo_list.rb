@@ -5,7 +5,6 @@ class TodoListTest < Test::Unit::TestCase
   self.test_order = :defined
 
   setup do
-
     @list = Ruboty::Todo::List.new(Ruboty::Brains::Memory.new)
   end
 
@@ -15,6 +14,7 @@ class TodoListTest < Test::Unit::TestCase
       @list.add(title: 'foo')
       assert_equal(@list.count, 1)
       assert_equal(@list[0].title, 'foo')
+      assert_equal(@list[0].id, 1)
     end
   end
 
@@ -40,6 +40,14 @@ class TodoListTest < Test::Unit::TestCase
       @list.cleanup
       assert_equal(@list.count, 1)
       assert_equal(@list[0].title, 'piyo')
+    end
+
+    test 'list can renum id' do
+      @list[0].delete
+      @list.cleanup
+      assert_equal(@list[0].id, 2)
+      @list.renum
+      assert_equal(@list[0].id, 1)
     end
 
     test 'item can set deadline' do
