@@ -1,7 +1,7 @@
 module Ruboty
   module Actions
     class Todo < Base
-      COMMANDS = %w[list help add start finish delete cleanup]
+      COMMANDS = %w[list help add start finish delete cleanup renum]
       attr_reader :todo_list
 
       def call
@@ -39,6 +39,11 @@ module Ruboty
 
       def cleanup(arg)
         todo_list.cleanup
+        list(arg)
+      end
+
+      def renum(arg)
+        todo_list.renum
         list(arg)
       end
 

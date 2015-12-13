@@ -10,10 +10,6 @@ module Ruboty
         @brain = brain
       end
 
-      def next_id
-        list[:last_id] += 1
-      end
-
       def items
         list[:items]
       end
@@ -32,10 +28,23 @@ module Ruboty
         items.find { |item| item.id == id }
       end
 
+      def renum
+        reset_id
+        items.each { |item| item.id = next_id }
+      end
+
       private
 
       def list
         brain.data['todo_list'] ||= { last_id: 0, items: [] }
+      end
+
+      def next_id
+        list[:last_id] += 1
+      end
+
+      def reset_id
+        list[:last_id] = 0
       end
     end
   end

@@ -42,6 +42,14 @@ class TodoListTest < Test::Unit::TestCase
       assert_equal(@list[0].title, 'piyo')
     end
 
+    test 'list can renum id' do
+      @list[0].delete
+      @list.cleanup
+      assert_equal(@list[0].id, 2)
+      @list.renum
+      assert_equal(@list[0].id, 1)
+    end
+
     test 'item can set deadline' do
       @list[0].deadline = '13:45'
       @list[1].deadline = 'INVALIDD STRING'
