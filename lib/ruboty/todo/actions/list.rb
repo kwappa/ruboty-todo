@@ -12,7 +12,13 @@ module Ruboty
         end
 
         def cleanup
-          todo_list.cleanup
+          todo_list.gc
+          todo_list.renum
+          list
+        end
+
+        def gc
+          todo_list.gc
           list
         end
 

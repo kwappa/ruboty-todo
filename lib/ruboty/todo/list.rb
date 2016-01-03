@@ -20,7 +20,7 @@ module Ruboty
         item
       end
 
-      def cleanup
+      def gc
         list[:items] = list[:items].reject { |item| item.deleted? || item.done? }
         reset_id if list[:items].empty?
         items
