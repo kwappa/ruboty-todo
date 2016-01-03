@@ -2,9 +2,9 @@ module Ruboty
   module Handlers
     class Todo < Base
       on(
-        /(?<command>list|cleanup|renum) todos\z/,
+        /(?<command>list|cleanup|gc|renum) todos\z/,
          name: 'list',
-         description: '(list|cleanup|renum) all todo items'
+         description: '(list|cleanup|gc|renum) all todo items'
       )
 
       on(

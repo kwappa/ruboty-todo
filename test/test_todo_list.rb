@@ -37,14 +37,14 @@ class TodoListTest < Test::Unit::TestCase
       assert_equal(@list[0].title, 'hoge')
       @list[0].delete
       assert_equal(@list.count, 2)
-      @list.cleanup
+      @list.gc
       assert_equal(@list.count, 1)
       assert_equal(@list[0].title, 'piyo')
     end
 
     test 'list can renum id' do
       @list[0].delete
-      @list.cleanup
+      @list.gc
       assert_equal(@list[0].id, 2)
       @list.renum
       assert_equal(@list[0].id, 1)
@@ -58,12 +58,12 @@ class TodoListTest < Test::Unit::TestCase
       assert_nil(@list[1].deadline_at)
     end
 
-    test 'reset id if item is empty after cleanup' do
+    test 'reset id if item is empty after gc' do
       @list[0].delete
-      @list.cleanup
+      @list.gc
       assert_equal(@list.send(:next_id), 3)
       @list[0].finish
-      @list.cleanup
+      @list.gc
       assert_true(@list.items.empty?)
       assert_equal(@list.send(:next_id), 1)
     end
