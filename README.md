@@ -1,5 +1,7 @@
 # Ruboty::Todo
 
+[![Build Status](https://travis-ci.org/kwappa/ruboty-todo.svg)](https://travis-ci.org/kwappa/ruboty-todo)
+
 ruboty handler to manage your todo list
 
 ## Usage
