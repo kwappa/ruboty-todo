@@ -4,9 +4,6 @@ module Ruboty
       class State < Base
         def call
           super
-          require 'pp'
-          pp message
-
           message.reply(change_item_state(message[:id].to_i, message[:state].to_sym))
         end
 
